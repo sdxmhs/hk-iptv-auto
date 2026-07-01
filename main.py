@@ -12,14 +12,13 @@ cc = OpenCC('s2t')
 
 # 1. 來源列表
 SOURCE_URLS = [
+    "https://iptv.clbug.com/download.php?type=ipv4&category=%E9%A6%99%E6%B8%AF%E9%A2%91%E9%81%93&format=m3u",
     # 香港專用源 (優先)
     "https://raw.githubusercontent.com/s14685/tv/main/iptvhk.txt",
     "https://raw.githubusercontent.com/iptv-org/iptv/refs/heads/master/streams/hk.m3u",
     "https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/HongKong.m3u8",
     "https://raw.githubusercontent.com/iptv-js/iptv/main/txt/ew_hk.txt",
     "https://raw.githubusercontent.com/chingithub1/iptv/main/Original",
-    "https://raw.githubusercontent.com/250992941/iptv/main/%E6%94%B6%E9%9B%86%E6%BA%90.txt",
-    "https://raw.githubusercontent.com/zzlab2018/live/master/Xtv2107.txt",
     "https://raw.githubusercontent.com/LiuYi0526/IPTVnew/main/IPTVnews.txt",
     # 其他綜合源
     "https://raw.githubusercontent.com/Supprise0901/TVBox_live/refs/heads/main/live.txt",
