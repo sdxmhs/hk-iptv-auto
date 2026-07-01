@@ -1,6 +1,8 @@
 import requests
 import re
 import datetime
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from opencc import OpenCC
 
 # 初始化繁簡轉換器
@@ -80,13 +82,107 @@ STATIC_CHANNELS = [
 
 # --- 邏輯區 ---
 
-def check_url(url):
-    """檢測鏈接是否有效 (超時 2 秒)"""
-    try:
-        response = requests.get(url, timeout=2, stream=True)
-        return response.status_code == 200
-    except:
-        return False
+def check_url(url, retries=2, timeout=5):
+    """檢測鏈接是否有效 - 增強版
+    1. 多次重試處理暫時性錯誤
+    2. 驗證 Content-Type 是否為視頻/串流格式
+    3. 讀取實際數據確認不是錯誤頁面
+    4. 檢查回應體大小是否合理
+    """
+    valid_content_types = [
+        'video/', 'application/x-mpegurl', 'application/vnd.apple.mpegurl',
+        'application/octet-stream', 'binary/octet-stream', 'application/dash+xml'
+    ]
+    
+    for attempt in range(retries + 1):
+        try:
+            response = requests.get(url, timeout=timeout, stream=True)
+            
+            if response.status_code != 200:
+                if attempt < retries:
+                    time.sleep(1)
+                    continue
+                return False
+            
+            # 檢查 Content-Type
+            content_type = response.headers.get('Content-Type', '').lower()
+            is_valid_type = any(ct in content_type for ct in valid_content_types)
+            
+            # 讀取前 10KB 數據驗證
+            data = b''
+            for chunk in response.iter_content(chunk_size=1024):
+                data += chunk
+                if len(data) >= 10240:  # 讀取 10KB
+                    break
+            
+            response.close()
+            
+            # 如果沒有數據，嘗試重試
+            if len(data) == 0:
+                if attempt < retries:
+                    time.sleep(1)
+                    continue
+                return False
+            
+            # 檢查是否為有效串流格式
+            data_str = data[:4096].decode('utf-8', errors='ignore').strip()
+            
+            # 有效 M3U8 格式檢查
+            if data_str.startswith('#EXTM3U') or data_str.startswith('#EXT-X-'):
+                return True
+            
+            # 有效 M3U 格式檢查
+            if data_str.startswith('#EXTINF'):
+                return True
+            
+            # 有效視頻數據檢查 (檢查常見的視頻文件頭)
+            if data[:4] in [b'\x00\x00\x00\x18', b'\x00\x00\x00\x1c', b'\x00\x00\x00\x20',
+                           b'\x1a\x45\xdf\xa3',  # WebM/Matroska
+                           b'\x52\x49\x46\x46',  # RIFF (AVI)
+                           ]:
+                return True
+            
+            # 如果 Content-Type 是視頻相關且有數據
+            if is_valid_type and len(data) > 0:
+                return True
+            
+            # 如果嘗試次數用盡仍無有效數據
+            if attempt < retries:
+                time.sleep(1)
+                continue
+            return False
+            
+        except requests.exceptions.Timeout:
+            if attempt < retries:
+                time.sleep(1)
+                continue
+            return False
+        except requests.exceptions.ConnectionError:
+            if attempt < retries:
+                time.sleep(1)
+                continue
+            return False
+        except Exception:
+            return False
+    
+    return False
+
+
+def check_url_concurrent(channels, max_workers=10):
+    """並行檢測多個頻道的有效性"""
+    results = {}
+    
+    def check_single(ch):
+        return ch['url'], check_url(ch['url'])
+    
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(check_single, ch): ch for ch in channels}
+        
+        for future in as_completed(futures):
+            url, is_valid = future.result()
+            results[url] = is_valid
+    
+    return results
 
 def get_sort_key(item):
     """計算頻道的排序權重"""
@@ -151,7 +247,7 @@ def fetch_and_parse():
 
 def generate_m3u(channels):
     total = len(channels)
-    print(f"\n🔍 共找到 {total} 個潛在頻道，開始檢測有效性...", flush=True)
+    print(f"\n🔍 共找到 {total} 個潛在頻道，開始並行檢測有效性...", flush=True)
     
     final_list = []
     
@@ -159,15 +255,15 @@ def generate_m3u(channels):
     for static in STATIC_CHANNELS:
         final_list.append(static)
         
-    # 2. 檢測網路源
-    for i, ch in enumerate(channels):
-        print(f"[{i+1}/{total}] 檢測: {ch['name']} ...", end=" ", flush=True)
-        
-        if check_url(ch['url']):
+    # 2. 並行檢測網路源
+    validity_map = check_url_concurrent(channels, max_workers=10)
+    
+    for ch in channels:
+        if validity_map.get(ch['url'], False):
             final_list.append(ch)
-            print("🟢 有效", flush=True)
+            print(f"  🟢 {ch['name']} - 有效", flush=True)
         else:
-            print("🔴 失效", flush=True)
+            print(f"  🔴 {ch['name']} - 失效", flush=True)
 
     # 3. 排序
     print("\n🔄 正在進行排序...", flush=True)
