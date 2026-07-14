@@ -1,5 +1,5 @@
 # Complete Project Codebase
-Generated on: Tue Jul  7 13:34:48 UTC 2026
+Generated on: Tue Jul 14 01:22:10 UTC 2026
 
 ## File: README.md
 ````md
@@ -121,13 +121,11 @@ opencc-python-reimplemented
 ## File: hk_live.m3u
 ````m3u
 #EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml"
-# Update: 2026-07-07 03:32:50
+# Update: 2026-07-13 14:38:19
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/翡翠台.png",翡翠台
 http://122.152.202.33/s/81a8a44f/index.m3u8?id=53
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/翡翠台.png",翡翠台
 http://r.jdshipin.com/n90gt
-#EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/TVB翡翠台.png",TVB翡翠台
-http://cdn9.163189.xyz/smt1.1.php?id=jade_twn
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/翡翠台.png",翡翠台
 http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct4
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/翡翠台.png",翡翠台
@@ -138,8 +136,6 @@ http://122.152.202.33/s/81a8a44f/index.m3u8?id=21
 http://cdn9.163189.xyz/smt1.1.php?id=inews_twn
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/TVB明珠.png",TVB明珠
 http://122.152.202.33/s/81a8a44f/index.m3u8?id=23
-#EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/明珠台.png",明珠台
-http://cdn9.163189.xyz/smt1.1.php?id=pearl_twn
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/有線財經信息台.png",有線財經信息台
 https://epg.pw/stream/0fddc0600d3868b05ad741d46294410aebca0fdc4fada5028dc54e624b7b17ca.m3u8
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/Viutv.png",Viutv
@@ -156,38 +152,20 @@ http://61.10.2.141/live_freedirect/freehd209_h.live/playlist.m3u
 http://cm61-10-2-143.hkcable.com.hk/live_freedirect/freehd209_h.live/playlist.m3u8
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/港台電視31 (官方).png",港台電視31 (官方)
 https://rthklive1-lh.akamaihd.net/i/rthk31_1@167495/index_2052_av-b.m3u8
-#EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/港台電視31.png",港台電視31
-http://bziyunshao.synology.me:8892/bysid/31#https://live.hkdvb.com/hls/live/31.m3u8?token=415002797090467
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/RTHK 31.png",RTHK 31
 https://www.rthk.hk/feeds/dtt/rthktv31_https.m3u8
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/港台電視32 (官方).png",港台電視32 (官方)
 https://rthklive2-lh.akamaihd.net/i/rthk32_1@168450/index_2052_av-b.m3u8
-#EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/港台電視32.png",港台電視32
-http://bziyunshao.synology.me:8892/bysid/32#https://live.hkdvb.com/hls/live/32.m3u8?token=415002797090467
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/RTHK 32.png",RTHK 32
 https://www.rthk.hk/feeds/dtt/rthktv32_https.m3u8
-#EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/RTHK31.png",RTHK31
-http://rthklive1-lh.akamaihd.net/i/rthk31_1@167495/index_810_av-b.m3u8
-#EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/RTHK31.png",RTHK31
-http://rthklive1-lh.akamaihd.net/i/rthk31_1@167495/index_2052_av-b.m3u8
-#EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/RTHK31.png",RTHK31
-https://rthktv31-live.akamaized.net/hls/live/2036818/RTHKTV31/master.m3u8
-#EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/RTHK31.png",RTHK31
-https://rthklive1-lh.akamaihd.net/i/rthk31_1@167495/master.m3u8
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/Anthony Bourdain: Parts Unknown.png",Anthony Bourdain: Parts Unknown
 https://jmp2.uk/plu-69173ce8abd4703b27f71d44.m3u8
-#EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/HEi Now (1080p).png",HEi Now (1080p)
-https://copacogen.desdeparaguay.net/heitv/heitv_py_alta/playlist.m3u8?admin=nacion
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/MS NOW (720p).png",MS NOW (720p)
 http://206.212.244.63/114/index.m3u8
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/Now 14 (1080p).png",Now 14 (1080p)
 https://r.il.cdn-redge.media/livehls/oil/ch14/live/ch14/live.livx/playlist.m3u8
 #EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/NOW TV (720p).png",NOW TV (720p)
 https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8
-#EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/NowMedia Television (1080p).png",NowMedia Television (1080p)
-https://stream-204968.castr.net/64e0c91d08bff3041638aee3/live_a4243540d4b911f0b624bda5e9a32aa9/index.m3u8
-#EXTINF:-1 group-title="Hong Kong" logo="https://epg.112114.xyz/logo/NowMedia Television Spanish (1080p).png",NowMedia Television Spanish (1080p)
-https://stream-204968.castr.net/64e0c91d08bff3041638aee3/live_a16fa020f4c411f09ddaa1978319689a/index.m3u8
 
 ````
 
@@ -207,6 +185,7 @@ cc = OpenCC('s2t')
 
 # 1. 來源列表
 SOURCE_URLS = [
+    "https://iptv.yang-1989.xyz/myTV/playlist.m3u",
     "https://iptv.clbug.com/download.php?type=ipv4&category=%E9%A6%99%E6%B8%AF%E9%A2%91%E9%81%93&format=m3u",
     # 香港專用源 (優先)
     "https://raw.githubusercontent.com/s14685/tv/main/iptvhk.txt",
