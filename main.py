@@ -12,6 +12,7 @@ cc = OpenCC('s2t')
 
 # 1. 來源列表
 SOURCE_URLS = [
+    "https://iptv.yang-1989.xyz/myTV/playlist.m3u",
     "https://iptv.clbug.com/download.php?type=ipv4&category=%E9%A6%99%E6%B8%AF%E9%A2%91%E9%81%93&format=m3u",
     # 香港專用源 (優先)
     "https://raw.githubusercontent.com/s14685/tv/main/iptvhk.txt",
